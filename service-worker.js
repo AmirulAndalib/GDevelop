@@ -5,7 +5,7 @@ if (typeof importScripts === 'function') {
   /* global workbox */
   if (workbox) {
     // Will be replaced by make-service-worker.js to include the proper version.
-    const VersionMetadata = {"version":"5.2.165","gitHash":"3c34866faaa9fdde025ac9866fc3429a25a30d47","versionWithHash":"5.2.165-3c34866faaa9fdde025ac9866fc3429a25a30d47"};
+    const VersionMetadata = {"version":"5.2.166","gitHash":"2496fc3eefd3a25c7a452d10b751395e9a6b6e13","versionWithHash":"5.2.166-2496fc3eefd3a25c7a452d10b751395e9a6b6e13"};
 
     // Contrary to other static assets (JS, CSS, HTML), libGD.js/wasm are not
     // versioned in their filenames. Instead, we version using a query string
@@ -28,19 +28,6 @@ if (typeof importScripts === 'function') {
     workbox.routing.registerNavigationRoute('/index.html', {
       blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/],
     });
-
-    // Cache resources from GDevelop cloudfront server (CORS enabled).
-    workbox.routing.registerRoute(
-      /https:\/\/resources\.gdevelop-app\.com\/.*$/,
-      workbox.strategies.networkFirst({
-        cacheName: 'gdevelop-resources-cache',
-        plugins: [
-          new workbox.expiration.Plugin({
-            maxEntries: 500,
-          }),
-        ],
-      })
-    );
 
     // Cache resources from GDevelop cloudfront server (CORS enabled).
     workbox.routing.registerRoute(
